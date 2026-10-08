@@ -1,0 +1,140 @@
+services:
+  namenode:
+    image: apache/hadoop:3.4.0
+    container_name: namenode
+    user: "0:0"
+    command: >
+      bash -c "
+      if [ ! -d /opt/hadoop/dfs/name/current ]; then
+        hdfs namenode -format -force;
+      fi &&
+      hdfs namenode
+      "
+    ports:
+      - "9870:9870"
+      - "9000:9000"
+    volumes:
+      - hadoop_namenode:/opt/hadoop/dfs/name
+      - ./hadoop/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+      - ./hadoop/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+    networks:
+      - bigdata-net
+
+  datanode:
+    image: apache/hadoop:3.4.0
+    container_name: datanode
+    user: "0:0"
+    command: ["hdfs", "datanode"]
+    ports:
+      - "9864:9864"
+    volumes:
+      - hadoop_datanode:/opt/hadoop/dfs/data
+      - ./hadoop/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+      - ./hadoop/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+    depends_on:
+      - namenode
+    networks:
+      - bigdata-net
+
+  spark-master:
+    image: bitnamilegacy/spark:3.5.0
+    container_name: spark-master
+    environment:
+      SPARK_MODE: master
+      SPARK_RPC_AUTHENTICATION_ENABLED: "no"
+      SPARK_RPC_ENCRYPTION_ENABLED: "no"
+      SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: "no"
+      SPARK_SSL_ENABLED: "no"
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    networks:
+      - bigdata-net
+
+  spark-worker:
+    image: bitnamilegacy/spark:3.5.0
+    container_name: spark-worker
+    environment:
+      SPARK_MODE: worker
+      SPARK_MASTER_URL: spark://spark-master:7077
+      SPARK_WORKER_MEMORY: 2G
+      SPARK_WORKER_CORES: 2
+      SPARK_RPC_AUTHENTICATION_ENABLED: "no"
+      SPARK_RPC_ENCRYPTION_ENABLED: "no"
+      SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: "no"
+      SPARK_SSL_ENABLED: "no"
+    depends_on:
+      - spark-master
+    ports:
+      - "8081:8081"
+    networks:
+      - bigdata-net
+
+  kafka:
+    image: apache/kafka:3.8.0
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    networks:
+      - bigdata-net
+
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - bigdata-net
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: bigdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - bigdata-net
+
+  jupyter:
+    image: continuumio/anaconda3:latest
+    container_name: jupyter
+    command: >
+      bash -c "
+      conda install -y jupyter &&
+      pip install pyspark==3.5.0 &&
+      jupyter notebook
+      --notebook-dir=/opt/notebooks
+      --ip=0.0.0.0
+      --port=8888
+      --no-browser
+      --allow-root
+      "
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/opt/notebooks
+      - ./shared-data:/opt/shared-data
+    depends_on:
+      - spark-master
+      - spark-worker
+    networks:
+      - bigdata-net
+
+networks:
+  bigdata-net:
+
+volumes:
+  hadoop_namenode:
+  hadoop_datanode:
+  mongo_data:
+  postgres_data:
