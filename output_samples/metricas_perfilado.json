@@ -1,0 +1,21 @@
+{
+  "registros_entrada": 100,
+  "registros_procesados": 87,
+  "registros_cuarentena": 13,
+  "completitud_entrada_pct": 95.0,
+  "completitud_salida_pct": 100.0,
+  "unicidad_id_salida_pct": 100.0,
+  "validez_salida_pct": 100.0,
+  "integridad_archivos": {
+    "validados": 2,
+    "rechazados": 1,
+    "tasa_validada_pct": 66.67
+  },
+  "importe_eur": {
+    "media": 70.99,
+    "mediana": 73.44,
+    "desviacion_estandar": 26.34,
+    "percentil_25": 53.8,
+    "percentil_75": 85.34
+  }
+}
