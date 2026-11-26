@@ -1,0 +1,8 @@
+{"particion":1,"offset":2,"vehiculo":"CAM-02","temp_c":-17.0,"lat":37.3896,"lon":-5.985,"timestamp_iso":"2026-11-26T17:56:24.159Z"}
+{"particion":0,"offset":2,"vehiculo":"CAM-03","temp_c":-16.5,"lat":37.3891,"lon":-5.9845,"timestamp_iso":"2026-11-26T17:56:26.659Z"}
+{"particion":1,"offset":7,"vehiculo":"CAM-04","temp_c":-16.0,"lat":37.3896,"lon":-5.985,"timestamp_iso":"2026-11-26T17:56:29.159Z"}
+{"particion":2,"offset":5,"vehiculo":"CAM-01","temp_c":-17.5,"lat":37.3891,"lon":-5.9845,"timestamp_iso":"2026-11-26T17:56:31.659Z"}
+{"particion":1,"offset":14,"vehiculo":"CAM-02","temp_c":-17.0,"lat":37.39,"lon":-5.9854,"timestamp_iso":"2026-11-26T17:56:36.159Z"}
+{"particion":0,"offset":8,"vehiculo":"CAM-03","temp_c":-16.5,"lat":37.3895,"lon":-5.9849,"timestamp_iso":"2026-11-26T17:56:38.659Z"}
+{"particion":1,"offset":19,"vehiculo":"CAM-04","temp_c":-16.0,"lat":37.39,"lon":-5.9854,"timestamp_iso":"2026-11-26T17:56:41.159Z"}
+{"particion":2,"offset":14,"vehiculo":"CAM-01","temp_c":-17.5,"lat":37.3897,"lon":-5.9851,"timestamp_iso":"2026-11-26T17:56:49.659Z"}

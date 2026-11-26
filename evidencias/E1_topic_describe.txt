@@ -1,0 +1,5 @@
+﻿Topic: telemetria-frio	TopicId: atZHLbOASQ6rn3sSfuWFpg	PartitionCount: 3	ReplicationFactor: 1	Configs: 
+	Topic: telemetria-frio	Partition: 0	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: telemetria-frio	Partition: 1	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: telemetria-frio	Partition: 2	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+

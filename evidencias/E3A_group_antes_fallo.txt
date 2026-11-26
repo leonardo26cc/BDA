@@ -1,0 +1,5 @@
+
+GROUP              TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                       HOST            CLIENT-ID
+grupo-alertas-frio telemetria-frio 0          -               0               -               consumidor-A-fa314dbe-41c5-450e-8c05-22284e1f669f /172.19.0.1     consumidor-A
+grupo-alertas-frio telemetria-frio 1          -               0               -               consumidor-A-fa314dbe-41c5-450e-8c05-22284e1f669f /172.19.0.1     consumidor-A
+grupo-alertas-frio telemetria-frio 2          -               0               -               consumidor-B-3fc6f684-ab53-4182-8856-f65cc0533229 /172.19.0.1     consumidor-B
